@@ -1,14 +1,13 @@
 import pytest
+import random
+import string
+import requests
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from webdriver_manager.firefox import GeckoDriverManager
-import random
-import string
-import requests
-
-BASE_URL = "https://stellarburgers.education-services.ru"
+from constants import BASE_URL, API_REGISTER
 
 @pytest.fixture(params=["chrome"], scope="function")
 def driver(request):
@@ -44,7 +43,7 @@ def create_user_via_api(generate_user):
         "password": generate_user["password"],
         "name": generate_user["name"]
     }
-    response = requests.post(f"{BASE_URL}/api/auth/register", json=payload)
+    response = requests.post(f"{BASE_URL}{API_REGISTER}", json=payload)
     if response.status_code == 200:
         data = response.json()
         return {

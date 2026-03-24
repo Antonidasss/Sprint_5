@@ -2,7 +2,7 @@ import pytest
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from pages.locators import MainPageLocators
-from conftest import BASE_URL
+from constants import BASE_URL
 
 class TestConstructorSections:
     def test_switch_to_buns(self, driver):

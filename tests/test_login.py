@@ -3,7 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from pages.locators import MainPageLocators, LoginPageLocators, ForgotPasswordPageLocators
-from conftest import BASE_URL
+from constants import BASE_URL
 
 class TestLogin:
     def test_login_via_main_page_button(self, driver, create_user_via_api):

@@ -2,7 +2,7 @@ import pytest
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from pages.locators import RegisterPageLocators, LoginPageLocators, MainPageLocators
-from conftest import BASE_URL
+from constants import BASE_URL
 
 class TestRegistration:
     def test_successful_registration(self, driver, generate_user):
