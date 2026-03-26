@@ -9,6 +9,8 @@ class MainPageLocators:
     SAUCES_SECTION = (By.XPATH, "//span[text()='Соусы']/parent::div")
     FILLINGS_SECTION = (By.XPATH, "//span[text()='Начинки']/parent::div")
     ACTIVE_SECTION = (By.XPATH, "//div[contains(@class, 'tab_tab_type_current__')]//span")
+    # Добавленные локаторы:
+    ORDER_BUTTON = (By.XPATH, "//button[text()='Оформить заказ']")
 
 class RegisterPageLocators:
     NAME_INPUT = (By.XPATH, "//label[text()='Имя']/following-sibling::input")
@@ -16,6 +18,8 @@ class RegisterPageLocators:
     PASSWORD_INPUT = (By.XPATH, "//input[@type='password']")
     REGISTER_BUTTON = (By.XPATH, "//button[text()='Зарегистрироваться']")
     ERROR_MESSAGE = (By.XPATH, "//p[text()='Некорректный пароль']")
+    # Добавленные локаторы:
+    LOGIN_LINK = (By.XPATH, "//a[text()='Войти']")
 
 class LoginPageLocators:
     EMAIL_INPUT = (By.XPATH, "//label[text()='Email']/following-sibling::input")
@@ -28,6 +32,9 @@ class ForgotPasswordPageLocators:
     LOGIN_BUTTON = (By.XPATH, "//a[text()='Войти']")
 
 class ProfilePageLocators:
-    LOGOUT_BUTTON = (By.XPATH, "//button[text()='Выйти']")
+    LOGOUT_BUTTON = (By.XPATH, "//button[text()='Выход']")
     CONSTRUCTOR_BUTTON = (By.XPATH, "//a[contains(@href,'/') and text()='Конструктор']")
     LOGO = (By.XPATH, "//div[@class='AppHeader_header__logo']/a")
+    # Добавленный локатор для универсального поиска (хотя лучше использовать выше)
+    CONSTRUCTOR_LINK_GENERIC = (By.XPATH, "//*[contains(text(),'Конструктор')]")
+    LOGO_LINK = (By.XPATH, "//a[@href='/']")

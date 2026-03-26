@@ -1,13 +1,11 @@
 import pytest
-import random
-import string
-import requests
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from webdriver_manager.firefox import GeckoDriverManager
-from constants import BASE_URL, API_REGISTER
+from helpers import generate_user_data, create_user_via_api
+from constants import BASE_URL
 
 @pytest.fixture(params=["chrome"], scope="function")
 def driver(request):
@@ -26,32 +24,8 @@ def driver(request):
     driver.quit()
 
 @pytest.fixture
-def generate_user():
-    first_name = "Anton"
-    last_name = "Zakupnev"
-    cohort = "42"
-    random_digits = ''.join(random.choices(string.digits, k=3))
-    email = f"{first_name}_{last_name}_{cohort}_{random_digits}@yandex.ru"
-    password = ''.join(random.choices(string.ascii_letters + string.digits, k=6))
-    name = "Test User"
-    return {"email": email, "password": password, "name": name}
-
-@pytest.fixture
-def create_user_via_api(generate_user):
-    payload = {
-        "email": generate_user["email"],
-        "password": generate_user["password"],
-        "name": generate_user["name"]
-    }
-    response = requests.post(f"{BASE_URL}{API_REGISTER}", json=payload)
-    if response.status_code == 200:
-        data = response.json()
-        return {
-            "email": generate_user["email"],
-            "password": generate_user["password"],
-            "name": generate_user["name"],
-            "accessToken": data.get("accessToken"),
-            "refreshToken": data.get("refreshToken")
-        }
-    else:
-        raise Exception(f"Failed to create user via API: {response.text}")
+def create_user_via_api_fixture():
+    """Фикстура для создания пользователя через API (предусловие)"""
+    user_data = generate_user_data()
+    user = create_user_via_api(user_data)
+    return user
